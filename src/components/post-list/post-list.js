@@ -6,15 +6,6 @@ import './post-list.css';
 
 const PostList = ({posts, onDelete, onToggleImportant, onToggleLiked}) => {
 
-    // const elements = posts.map((item) => {
-    //     return (
-    //         <li className="list-group-item">
-    //             <PostListItem 
-    //             label={item.label} 
-    //             important={item.important} />
-    //         </li>
-    //     )
-    // });
     const elements = posts.map((item) => {
 
         if (typeof item === 'object' && isEmpty(item)) {
