@@ -254,7 +254,6 @@ export default class App extends Component {
     }
 
     render() {
-        console.log(this.state.data);
 
         const {data, term, filter} = this.state;
 
