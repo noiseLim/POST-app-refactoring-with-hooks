@@ -26,16 +26,18 @@ function App() {
     const [filter, updFilter] = useState('all');
     const [maxId, updMaxId] = useState(4);
 
-    useEffect(() => {
-        deleteItem();
-        addItem();
-        onToggleImportant();
-        onToggleLiked();
-        // searchPost();
-        onUpdateSearch();
-        onFilterSelect();
-        filterPost();
-    }, [])
+    // useEffect(() => {
+    //     console.log(`useEffect()`);
+    //     // deleteItem();
+    //     // addItem();
+    //     // onToggleImportant();
+    //     // onToggleLiked();
+    //     // searchPost();
+    //     // onUpdateSearch();
+    //     // onFilterSelect();
+    //     // filterPost();
+
+    // }, [data])
 
 
     const deleteItem = (id) => {
@@ -44,10 +46,10 @@ function App() {
 
             const newArr = [...data.slice(0, index), ...data.slice(index + 1)];
 
-            return {
-                data: newArr
-            }
+            return updData(newArr)
         });
+        console.log(`deleteItem: ${data}`);
+        console.log(data);
     }
 
     const addItem = (body) => {
@@ -58,9 +60,7 @@ function App() {
         }
         updData((data) => {
             const newArr = [...data, newItem];
-            return {
-                data: newArr
-            }
+            return updData(newArr)
         })
     }
 
@@ -71,10 +71,10 @@ function App() {
             const old = data[index];
             const newItem = {...old, important: !old.important};
             const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-            return {
-                data: newArr
-            }
+            return updData(newArr)
         })
+        // console.log(`onToggleImportant: ${data}`);
+        // console.log(data);
     }
 
     const onToggleLiked = (id) => {
@@ -84,9 +84,7 @@ function App() {
             const old = data[index];
             const newItem = {...old, like: !old.like};
             const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-            return {
-                data: newArr
-            }
+            return updData(newArr)
         })
     }
 
@@ -115,15 +113,29 @@ function App() {
         }
     }
 
-    const liked = data.filter(item => item.like).length;
+    const liked = () => {
+        console.log(data);
+        console.log(Array.isArray(data));
+        
+        return data.filter(item => item.like).length
+    }
+
+    // const liked = data.filter(item => item.like).length;
+
+    // console.log(`liked: ${liked}`);
+    // console.log(typeof(liked()));
+    // console.log(liked());
+
+
     const allPosts = data.length;
+
     
     const visiblePost = filterPost(searchPost(data, term), filter);
     
     return (
         <AppBlock>
             <AppHeader
-                liked={liked}
+                liked={liked()}
                 allPosts={allPosts}/>
             <div className="search-panel d-flex">
                 <SearchPanel
