@@ -4,11 +4,11 @@ import './post-add-form.css';
 
 function PostAddForm({onAdd}) {
 
-    const [text, updText] = useState('');
+    const [text, setText] = useState('');
 
     const onSubmit = () => {
         onAdd(text);
-        updText('');
+        setText('');
     }
 
     return (
@@ -19,7 +19,7 @@ function PostAddForm({onAdd}) {
                 type="text"
                 placeholder="О чем вы думаете?"
                 className="form-control new-post-label"
-                onChange={(e) => updText(e.target.value)}
+                onChange={(e) => setText(e.target.value)}
                 value={text}
             />
             <button

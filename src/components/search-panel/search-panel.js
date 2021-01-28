@@ -4,7 +4,7 @@ import './search-panel.css';
 
 function SearchPanel({onUpdateSearch}) {
 
-    const [term, updTerm] = useState('');
+    const [term, setTerm] = useState('');
 
     useEffect(() => {
         onUpdateSearch(term)
@@ -15,7 +15,7 @@ function SearchPanel({onUpdateSearch}) {
             className="form-control search-input"
             type="text"
             placeholder="Поиск по записям"
-            onChange={e => updTerm(e.target.value)}
+            onChange={e => setTerm(e.target.value)}
         />
     )
 }
